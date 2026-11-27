@@ -1,0 +1,8 @@
+Herdr File Jump
+
+The Files panel and its SVG icons, plus the base main layout, are from
+herdrdev/herdr-app v0.1.18, licensed under Apache-2.0.
+https://github.com/herdrdev/herdr-app/tree/v0.1.18
+
+The Files panel source and the main layout were modified to route remote
+terminal links into the read-only file preview.

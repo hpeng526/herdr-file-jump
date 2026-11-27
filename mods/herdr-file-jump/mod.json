@@ -1,0 +1,5 @@
+{
+  "place": "none",
+  "title": "Herdr File Jump",
+  "link_handlers": [{ "kind": "file", "pattern": "." }]
+}
