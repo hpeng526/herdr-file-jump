@@ -1,21 +1,30 @@
 # Herdr File Jump
 
-A Herdr App desktop mod for opening remote text files straight from
-terminal output. On macOS, hold Cmd and click a file path in a remote
-terminal. On Linux or Windows, use Ctrl-click. The right-hand Files
-panel opens and previews the file on the same machine as that terminal.
-The terminal keeps its focus.
+Cmd-click a path in a remote terminal to open it in Herdr's right-hand
+Files panel. If the link includes a line number, Files scrolls to it
+without taking focus from the terminal.
 
-A recognized link can be an absolute POSIX path, a relative path such
-as `src/main.rs:42`, or a `file://` link. Relative paths follow the
-clicked terminal's working directory. A numeric line or column is passed
-to the read-only editor's selection. Local terminal links keep Herdr's
-default behavior. It does not make otherwise undetected plain filenames
-clickable or add previews for binary files.
+![A remote terminal link open in the Files panel](preview.png)
 
-## Try it in Herdr 0.1.18
+## Install
 
-From this directory, with Herdr running:
+Give this prompt to your agent in Herdr:
+
+> Read ~/.config/herdr-app/AGENTS.md, then add this mod:
+> https://github.com/hpeng526/herdr-file-jump
+> Wire it into a personal copy of your current Herdr layout as described in
+> RECIPE.md. Keep the shipped layout unchanged.
+
+Herdr File Jump is a desktop App mod built on Herdr 0.1.18. It does not
+install a layout or change keybindings on its own. Install its
+`mods/herdr-file-jump/` directory, then use it in a personal layout that
+has the standard right-hand Files stack. Set the `files` block's
+`content.mod` to `herdr-file-jump` and add `herdr-file-jump` to the
+layout's root `link_handlers` array. Keep existing link handlers.
+
+For a fresh setup based on Herdr's stock `main` layout, the example
+wires these two settings together. From this repository, with Herdr
+running:
 
 ```sh
 app_home=${HERDR_APP_HOME:-"$HOME/.config/herdr-app"}
@@ -23,21 +32,31 @@ test ! -e "$app_home/mods/herdr-file-jump" &&
 test ! -e "$app_home/layouts/main-file-jump.json" &&
 cp -R mods/herdr-file-jump "$app_home/mods/" &&
 herdr-app check "$app_home/mods/herdr-file-jump" &&
-cp layouts/main-file-jump.json "$app_home/layouts/" &&
+cp examples/main-file-jump.json "$app_home/layouts/" &&
 herdr-app do layout.switch --name main-file-jump
 ```
 
-In a remote POSIX terminal, print an existing text path. For example,
-`printf '%s\n' /etc/hosts`, then Cmd-click the printed path on macOS.
-The Files header should show `/etc/hosts` and its contents from that
-terminal's machine. The back arrow returns to the file tree. Switch
-back with `herdr-app do layout.switch --name main`.
+## Use
 
-The mod leaves the shipped layout and files untouched. It reads files
-via the connected Herdr Core and retains the built-in Files panel's
-folder and Git reads. A `~/` link queries the remote `HOME` with
-`printenv`. It does not edit source files, run their contents or open an
-external editor.
+In a remote POSIX terminal, print an existing text path, for example
+`printf '%s\n' /etc/hosts`. On macOS, hold Cmd and click the printed
+path. On Linux and Windows, use Ctrl-click. The Files panel opens the
+file on the terminal's machine. The back arrow returns to the file
+tree. When using the example layout, switch back with
+`herdr-app do layout.switch --name main`.
+
+The mod handles recognized absolute and relative POSIX paths, including
+`src/main.rs:42`, and recognized `file://` links. Relative paths are
+resolved from the clicked terminal's working directory. Local links
+retain Herdr's default behavior. It cannot make bare filenames that
+Herdr does not recognize clickable, and it does not preview binary
+files.
+
+It reads files via the connected Herdr Core and retains the built-in
+Files panel's `sh` or PowerShell directory listing and Git reads. A
+`~/` link runs `printenv HOME` on the source machine. It does not edit
+source files, run their contents, open an external editor, or contact
+third-party services.
 
 ## Checks
 

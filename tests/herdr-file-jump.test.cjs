@@ -19,7 +19,7 @@ async function harness() {
   const calls = { commands: [], reads: [], exec: [], editors: [] };
   let activeSpace = space;
   let contents = async () => "line one\nline two\nline three\n";
-  let currentLayout = JSON.parse(fs.readFileSync(path.join(mod, "../../layouts/main-file-jump.json"), "utf8"));
+  let currentLayout = JSON.parse(fs.readFileSync(path.join(mod, "../../examples/main-file-jump.json"), "utf8"));
   const helpers = {
     "herdr": {
       spaces: () => [activeSpace],
