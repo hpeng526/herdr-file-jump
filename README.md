@@ -8,19 +8,22 @@ without taking focus from the terminal.
 
 ## Install
 
-Give this prompt to your agent in Herdr:
+### Tell your agent
 
-> Read ~/.config/herdr-app/AGENTS.md, then add this mod:
-> https://github.com/hpeng526/herdr-file-jump
-> Wire it into a personal copy of your current Herdr layout as described in
-> RECIPE.md. Keep the shipped layout unchanged.
+Paste this into a coding agent on the machine running Herdr Desktop:
 
-Herdr File Jump is a desktop App mod built on Herdr 0.1.18. It does not
-install a layout or change keybindings on its own. Install its
-`mods/herdr-file-jump/` directory, then use it in a personal layout that
-has the standard right-hand Files stack. Set the `files` block's
-`content.mod` to `herdr-file-jump` and add `herdr-file-jump` to the
-layout's root `link_handlers` array. Keep existing link handlers.
+> Read ~/.config/herdr-app/AGENTS.md, then add this mod: https://github.com/hpeng526/herdr-file-jump
+
+The agent should follow [RECIPE.md](RECIPE.md) to wire the mod into a
+personal layout without editing the shipped layout. This mod is for
+Herdr Desktop (built on 0.1.18), not the Android or iOS client.
+
+### Install by hand
+
+Copy `mods/herdr-file-jump/` into Herdr's mods directory. In a personal
+layout with the standard right-hand Files stack, set the `files` block's
+`content.mod` to `herdr-file-jump` and add `herdr-file-jump` to the root
+`link_handlers` list, keeping existing handlers.
 
 For a fresh setup based on Herdr's stock `main` layout, the example
 wires these two settings together. From this repository, with Herdr
